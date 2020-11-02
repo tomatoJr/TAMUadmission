@@ -1,0 +1,46 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class = "container">
+
+
+    <script>
+    function myFunction()
+    {
+        alert("Email has been sent");
+        var text = "Email has been sent";
+    }
+    </script>
+        <a class="btn btn-secondary" href="/table" role="button">CARD<->SHEET</a>
+        <!--<a class="btn btn-secondary" href="/email" role="button" onclick="myFunction()" value="Alert">EMAIL</a>-->
+
+        <div class="row">
+            {%for x in api%}
+            <div class="col-sm-4">
+                
+            <div class="card" style="width: 14rem;">
+
+                <div class="card-body">
+                <h5 class="card-title">{{x.studentName}}</h5>
+                <p class="card-text"> GRE: {{x.studentGre}}</p>
+                <p class="card-text"> GPA: {{x.studentGPA}}</p>
+                <a class="btn btn-dark" href="/review" role="button">REVIEW</a>
+ 
+            </div>
+          </div>
+
+          
+          
+          
+            </div>
+            {%endfor%}
+    </div>
+
+    </div>
+
+
+
+
+    <!-- <p>{{api}}</p> -->
+{%endblock%}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!--<h1>This page is table</h1>-->
+    <div class = "container">
+        <a class="btn btn-secondary" href='../' role="button">CARD<->SHEET</a>
+    <table class="table table-bordered">
+        <caption>TABLE</caption>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Name</th>
+            <th>GRE</th>
+            <th>GPA</th>
+            
+          </tr>
+        </thead>
+     
+
+        <tbody>
+        {%for x in api%}
+          <tr>
+            <td><a class="btn btn-dark" href="/review" role="button">REVIEW</a></td>
+            <td>{{x.studentName}}</td>
+            <td>{{x.studentGre}}</td>
+            <td>{{x.studentGPA}}</td>
+            
+          </tr>
+        {%endfor%}
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+
+    <!-- <p>{{api}}</p> -->
+{%endblock%}

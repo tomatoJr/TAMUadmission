@@ -1,0 +1,36 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <h1>This page is card</h1>
+    <div class = "container">
+
+
+    <script>
+    function myFunction()
+    {
+        alert("SUCCESS!");
+        var text = "Email has been sent";
+    }
+    </script>
+        <a href='/table' class="btn btn-primary" onclick="myFunction()">CARD<->SHEET</a>
+        <a href='/email' class="btn btn-primary" input type="button" onclick="myFunction()" value="Alert">EMAIL</a>
+        <div class="row">
+
+            <div class="col-sm">
+                
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                <h5 class="card-title">{{api.studentName}}</h5>
+                <p class="card-text"> GRE: {{api.studentName}}</p>
+                <p class="card-text"> GPA: {{api.studentName}}</p>
+            </div>
+          </div>
+            </div>
+
+    </div>
+    </div>
+
+{%endblock%}
