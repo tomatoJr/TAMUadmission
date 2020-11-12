@@ -9,8 +9,23 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os
+
 
 from pathlib import Path
+
+
+
+from django.core.exceptions import ImproperlyConfigured
+ 
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -96,6 +111,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_ALL_TABLES'",
+        },
         # 'HOST': '127.0.0.1',
         # 'PORT': '3306',
         'NAME': 'test',
@@ -103,6 +121,8 @@ DATABASES = {
         # 'PASSWORD': 'admin',
     }
 }
+
+
 
 
 
