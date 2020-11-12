@@ -2,7 +2,55 @@
 {% block content %}
     <!--<h1>This page is table</h1>-->
     <div class = "container">
-        <a class="btn btn-secondary" href='../' role="button">CARD<->SHEET</a>
+      
+      
+    <form> 
+      <div class="form-row">
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Name</label>
+          <select id="inputState" class="form-control">
+            <option selected>Select reviewer's name</option>
+            <option>Tanzir</option>
+            <option>Hank</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Nationality</label>
+          <select id="inputState" class="form-control">
+            <option selected>Filter by nationality</option>
+            <option>US</option>
+            <option>China</option>
+            <option>India</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Interest</label>
+          <select id="inputState" class="form-control">
+            <option selected>Filter by Research Interest</option>
+            <option>NLP</option>
+            <option>AI</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Status</label>
+          <select id="inputState" class="form-control">
+            <option selected>Filter by reviewing status</option>
+            <option>All candidates</option>
+            <option>reviewed</option>
+          </select>
+        </div>
+             <button type="submit" class="btn btn-secondary">Confirm</button>
+      </div>
+  </form>
+  
+  
+  
+<br>
+<br>
+
+  <a class="btn btn-secondary" href='../' role="button">CARD<->SHEET</a>
+  <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
+  
     <table class="table table-bordered">
         <caption>TABLE</caption>
         <thead>

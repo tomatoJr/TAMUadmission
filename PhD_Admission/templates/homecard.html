@@ -12,12 +12,62 @@
         var text = "Email has been sent";
     }
     </script>
-        <a class="btn btn-secondary" href="/table" role="button">CARD<->SHEET</a>
+
         <!--<a class="btn btn-secondary" href="/email" role="button" onclick="myFunction()" value="Alert">EMAIL</a>-->
+        
+        
+        
+    <form> 
+      <div class="form-row">
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Name</label>
+          <select id="inputState" class="form-control">
+            <option selected>Select reviewer's name</option>
+            <option>Tanzir</option>
+            <option>Hank</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Nationality</label>
+          <select id="inputState" class="form-control">
+            <option selected>Filter by nationality</option>
+            <option>US</option>
+            <option>China</option>
+            <option>India</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Interest</label>
+          <select id="inputState" class="form-control">
+            <option selected>Filter by Research Interest</option>
+            <option>NLP</option>
+            <option>AI</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Status</label>
+          <select id="inputState" class="form-control">
+            <option selected>Filter by reviewing status</option>
+            <option>All candidates</option>
+            <option>reviewed</option>
+          </select>
+        </div>
+             <button type="submit" class="btn btn-secondary">Confirm</button>
+      </div>
+  </form>
+  
+  
+<br>
+    <a class="btn btn-secondary" href="/table" role="button">CARD<->SHEET</a>
+    <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
+
+
+
+
 
         <div class="row">
             {%for x in api%}
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 
             <div class="card" style="width: 14rem;">
 

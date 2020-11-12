@@ -3,34 +3,90 @@
 {% block content %}
 
 
-    <h1>This page is card</h1>
     <div class = "container">
+    <br>
+    <br>
+    <br>
+<div>
+    <a class="btn btn-secondary" href="../" role="button">Home</a>
+    <a class="btn btn-secondary" href="/review" role="button">Previous candidate</a>
+    <a class="btn btn-secondary" href="/review" role="button">Next candidate</a>
+    <a href="#" class="badge badge-primary">Reviewing by Tanzir</a>
+    <a href="#" class="badge badge-success">nationality: All</a>
+    <a href="#" class="badge badge-success">research interest: AI</a>
+    <a href="#" class="badge badge-success">status: not reviewed</a>
+    <a href="#" class="badge badge-warning">candidate index: 12/23</a>
+</div>
+
+<br>
 
 
-    <script>
-    function myFunction()
-    {
-        alert("SUCCESS!");
-        var text = "Email has been sent";
-    }
-    </script>
-        <a href='/table' class="btn btn-primary" onclick="myFunction()">CARD<->SHEET</a>
-        <a href='/email' class="btn btn-primary" input type="button" onclick="myFunction()" value="Alert">EMAIL</a>
-        <div class="row">
 
-            <div class="col-sm">
-                
-            <div class="card" style="width: 18rem;">
 
-                <div class="card-body">
-                <h5 class="card-title">{{api.studentName}}</h5>
-                <p class="card-text"> GRE: {{api.studentName}}</p>
-                <p class="card-text"> GPA: {{api.studentName}}</p>
-            </div>
-          </div>
-            </div>
 
-    </div>
+
+<table class="table table-bordered">
+<thead>
+    <tr>
+      <th>Reviewing status</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Gender, Ethnicity, Residency, Citizenship</th>
+      <th>Average Score</th>
+      <th>Applied Degree</th>
+      <th>Nationality</th>
+      <th>Email</th>
+      <th>Potential Faculty</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Not reviewed by Tanzir</td>
+      <td>12</td>
+      <td>Otto</td>
+      <td>Male</td>
+      <td>4.5</td>
+      <td>CS PhD</td>
+      <td>US</td>
+      <td>Otto@gmail.com</td>
+      <td>Tanzir</td>
+    </tr>
+
+  </tbody>
+  <thead>
+    <tr>
+      <th>BS University</th>
+      <th>BS GPA</th>
+      <th>MS University</th>
+      <th>MS GPA</th>
+      <th>GRE Score</th>
+      <th>Toefl score</th>
+      <th>Faculty contact</th>
+      <th>Faculty giving GANT/GAT</th>
+      <th>Faculty giving GAR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TAMU </td>
+      <td>3.9</td>
+      <td>TAMU </td>
+      <td>3.9</td>
+      <td>320</td>
+      <td>N/A</td>
+      <td>Tanzir</td>
+      <td>N/A</td>
+      <td>N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
     </div>
 
 {%endblock%}

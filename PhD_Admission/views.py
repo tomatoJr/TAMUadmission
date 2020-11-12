@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect
+
+from .models import Applicant
+
+
 # Create your views here.
 def homecard(request):
     import requests
@@ -92,4 +96,92 @@ def use(request):
         notFound = 'please...'
         return render(request, 'user.html', {'notFound' : notFound})
     
-    
+
+
+
+
+def addApplicantInfo(request):
+
+#     applicant = Applicant.objects.create(
+#         Application_ID="8384741904",
+#         Average_Review_Score=0,
+#         Applied_Degree="Ph.D. Computer Science",
+#         Nationality="US",
+#         Name="Kanye West",
+#         Email="kanye@gmail.com",
+#         Research_Interest="Data Sicence; Artificial Intelligence",
+#         BS_University_and_GPA="Oxford University 4,0",
+#         MS_University_and_GPA="Stanford University 3.0",
+#         GRE_Score=152,
+#         TOEFL_Score=91,
+#         Gender='Male',
+#         Ethnicity='African-American',
+#         Residency='US',
+#         Citizenship='US',
+
+#         Potential_Faculty='',
+#         Faculty_Contact='',
+#         Faculty_giving_GANT_GAT='',
+#         Faculty_giving_GAR='',
+#     )
+
+#     applicant = Applicant.objects.create(
+#         Application_ID="7419048384",
+#         Average_Review_Score=0,
+#         Applied_Degree="M.S. Computer Science",
+#         Nationality="US",
+#         Name="Donald J. Trump",
+#         Email="trump@gmail.com",
+#         Research_Interest="Artificial Intelligence;Natural Language Processing",
+#         BS_University_and_GPA="University of Cambridge 4.0",
+#         MS_University_and_GPA="",
+#         GRE_Score=129,
+#         TOEFL_Score=100,
+#         Gender='Male',
+#         Ethnicity='American',
+#         Residency='US',
+#         Citizenship='US',
+
+#         Potential_Faculty='',
+#         Faculty_Contact='',
+#         Faculty_giving_GANT_GAT='',
+#         Faculty_giving_GAR='',
+#     )
+
+#     applicant = Applicant.objects.create(
+#         Application_ID="1904837484",
+#         Average_Review_Score=0,
+#         Applied_Degree="Ph.D. Computer Science",
+#         Nationality="US",
+#         Name="Captain America",
+#         Email="cap@gmail.com",
+#         Research_Interest="Algorithms and Theory",
+#         BS_University_and_GPA="Massachusetts Institute of Technology 3.0",
+#         MS_University_and_GPA="Stanford University 4.0",
+#         GRE_Score=149,
+#         TOEFL_Score=110,
+#         Gender='Female',
+#         Ethnicity='American',
+#         Residency='US',
+#         Citizenship='US',
+#     )
+
+#     applicant = Applicant.objects.create(
+#         Application_ID="3037912279",
+#         Average_Review_Score=0,
+#         Applied_Degree="Ph.D. Computer Science",
+#         Nationality="US",
+#         Name="Jessica Jones",
+#         Email="jessyJ@gmail.com",
+#         Research_Interest="Digital Humanities;Embedded Systems",
+#         BS_University_and_GPA="Imperial College London 3.0",
+#         MS_University_and_GPA="Imperial College London 4.0",
+#         GRE_Score=148,
+#         TOEFL_Score=108,
+#         Gender='Female',
+#         Ethnicity='Asian',
+#         Residency='India',
+#         Citizenship='International',
+#     )
+
+    return HttpResponse('Successfully added info!')

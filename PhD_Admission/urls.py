@@ -8,6 +8,6 @@ urlpatterns = [
     path('email/', views.send_email, name='send_email'),
     path('review/', views.review, name='review'),
 
-
+    path('addApplicantInfo/', views.addApplicantInfo),
     # path('', include('misterwu')),
 ]
