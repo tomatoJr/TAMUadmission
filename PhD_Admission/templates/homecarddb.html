@@ -79,11 +79,7 @@
                 <p class="card-text"> GRE: {{x.GRE_Score}}</p>
 
                 
-                <form role="button" action="{{x.App_Seq_No}}/review/" method="post">
-                {% csrf_token %}
-                <input type="submit" value="REVIEW">
-
-                <!--<a class="btn btn-dark" href="/review" role="button">REVIEW</a>-->
+                <a class="btn btn-dark" href="/review" role="button">REVIEW</a>
  
             </div>
           </div>

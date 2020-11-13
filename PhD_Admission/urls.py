@@ -9,5 +9,7 @@ urlpatterns = [
     path('review/', views.review, name='review'),
 
     path('addApplicantInfo/', views.addApplicantInfo),
+    path('<int:app_seq_no>/review/', views.review, name='review'),
+
     # path('', include('misterwu')),
 ]

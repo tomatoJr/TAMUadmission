@@ -1,22 +1,9 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 {% extends 'base.html' %}
 {% block content %}
-
+    <!--<h1>This page is table</h1>-->
     <div class = "container">
-
-
-    <script>
-    function myFunction()
-    {
-        alert("Email has been sent");
-        var text = "Email has been sent";
-    }
-    </script>
-
-        <!--<a class="btn btn-secondary" href="/email" role="button" onclick="myFunction()" value="Alert">EMAIL</a>-->
-        
-        
-        
+      
+      
     <form> 
       <div class="form-row">
         <div class="col">
@@ -58,42 +45,38 @@
   </form>
   
   
+  
 <br>
-    <a class="btn btn-secondary" href="/table" role="button">CARD<->SHEET</a>
-    <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
+<br>
 
+  <a class="btn btn-secondary" href='../' role="button">CARD<->SHEET</a>
+  <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
+  
+    <table class="table table-bordered">
+        <caption>TABLE</caption>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Name</th>
+            <th>GRE</th>
+            <th>GPA</th>
+            
+          </tr>
+        </thead>
+     
 
-
-
-
-        <div class="row">
-            {%for x in applicants%}
-
-            <div class="col-sm-3">
-                
-            <div class="card" style="width: 14rem;">
-
-                <div class="card-body">
-                <h5 class="card-title">{{x.Name}}</h5>
-                <p class="card-text"> GPA: {{x.MS_University_and_GPA}}</p>
-                <p class="card-text"> GRE: {{x.GRE_Score}}</p>
-
-                
-                <form role="button" action="{{x.App_Seq_No}}/review/" method="post">
-                {% csrf_token %}
-                <input type="submit" value="REVIEW">
-
-                <!--<a class="btn btn-dark" href="/review" role="button">REVIEW</a>-->
- 
-            </div>
-          </div>
-
-          
-          
-          
-            </div>
-            {%endfor%}
-    </div>
+        <tbody>
+        {%for x in api%}
+          <tr>
+            <td><a class="btn btn-dark" href="/review" role="button">REVIEW</a></td>
+            <td>{{x.studentName}}</td>
+            <td>{{x.studentGre}}</td>
+            <td>{{x.studentGPA}}</td>
+            
+          </tr>
+        {%endfor%}
+        </tbody>
+      </table>
 
     </div>
 
