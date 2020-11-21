@@ -58,20 +58,20 @@
           <tr>
             <th>Action</th>
             <th>Name</th>
+            <th>MS GPA</th>
             <th>GRE</th>
-            <th>GPA</th>
             
           </tr>
         </thead>
      
 
         <tbody>
-        {%for x in api%}
+        {%for x in applicants%}
           <tr>
-            <td><a class="btn btn-dark" href="/review" role="button">REVIEW</a></td>
-            <td>{{x.studentName}}</td>
-            <td>{{x.studentGre}}</td>
-            <td>{{x.studentGPA}}</td>
+            <td><a class="btn btn-dark" href="{{x.App_Seq_No}}/review" role="button">REVIEW</a></td>
+            <td>{{x.Name}}</td>
+            <td>{{x.MS_University_and_GPA}}</td>
+            <td>{{x.GRE_Score}}</td>
             
           </tr>
         {%endfor%}

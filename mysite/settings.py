@@ -15,16 +15,15 @@ import os
 from pathlib import Path
 
 
-
 from django.core.exceptions import ImproperlyConfigured
- 
+
+
 def get_env_variable(var_name):
     try:
         return os.environ[var_name]
     except KeyError:
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,16 +44,14 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-#Email Config
+# Email Config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tamu.csce.phdadmission@gmail.com'
-EMAIL_HOST_PASSWORD = 'mnddplrzztpuvgah' #past the key or password app here
+EMAIL_HOST_PASSWORD = 'mnddplrzztpuvgah'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'default from email'
-
-
 
 
 INSTALLED_APPS = [
@@ -101,29 +98,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_ALL_TABLES'",
-        },
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '3306',
-        'NAME': 'test',
-        # 'USER': 'admin',
-        # 'PASSWORD': 'admin',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_ALL_TABLES'",
+#         },
+#         # 'HOST': '127.0.0.1',
+#         # 'PORT': '3306',
+#         'NAME': 'test',
+#         # 'USER': 'admin',
+#         # 'PASSWORD': 'admin',
+#     }
+# }
 
 
 # Password validation
