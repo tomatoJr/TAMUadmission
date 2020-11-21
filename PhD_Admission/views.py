@@ -9,33 +9,25 @@ from .models import Applicant
 
 # Create your views here.
 def homecard(request):
-    import requests
-    import json
-    api_request = requests.get("https://api.github.com/users?since=0")
-    #api = json.loads(api_request.content)
-    api = [{'studentName': 'A', 'studentGre': '320', 'studentGPA': '3.5'}, ]
     applicants = Applicant.objects.all()
-    context = {"api": api, "applicants": applicants}
-
+    context = {"applicants": applicants, "total_num": len(applicants)}
     return render(request, 'homecard.html', context)
 
 
 def hometable(request):
-    # import requests
-    # import json
-    # api_request = requests.get("https://api.github.com/users?since=0")
-
     applicants = Applicant.objects.all()
-    context = {"applicants": applicants}
+    context = {"applicants": applicants, "total_num": len(applicants)}
     return render(request, 'hometable.html', context)
 
 
-def review(request, app_seq_no=None):
-    import requests
-    api = {'studentName': 'A', 'studentGre': '320', 'studentGPA': '3.5'}
+def review(request, app_seq_no=None, pointer=0, total_num=0):
+    applicants = Applicant.objects.all()
     applicant = get_object_or_404(Applicant, pk=app_seq_no)
 
-    return render(request, 'review.html', {"api": api, "applicant": applicant})
+    context = {"applicant": applicant,
+               "applicants": applicants,
+               "pointer": pointer, "total_num": total_num}
+    return render(request, 'review.html', context)
 
 
 def send_email(request):
@@ -75,6 +67,25 @@ def use(request):
     else:
         notFound = 'please...'
         return render(request, 'user.html', {'notFound': notFound})
+
+
+def search(request):
+    print(request)
+
+    search_applicants = Applicant.objects.filter(
+        Nationality__icontains=request.GET.get('Nationality'))
+
+    print(search_applicants)
+
+    context = {}
+    context['applicants'] = search_applicants
+    context['total_num'] = len(search_applicants)
+    # return render(request, 'search.html', context)
+    return render(request, 'homecard.html', context)
+
+
+def test(request):
+    return render(request, 'test.html', {})
 
 
 def addApplicantInfo(request):
@@ -120,7 +131,7 @@ def addApplicantInfo(request):
         Application_ID="1904837484",
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
-        Nationality="US",
+        Nationality="Korea",
         Name="Captain America",
         Email="cap@gmail.com",
         Research_Interest="Algorithms and Theory;Artificial Intelligence",
@@ -138,7 +149,7 @@ def addApplicantInfo(request):
         Application_ID="3037912279",
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
-        Nationality="US",
+        Nationality="India",
         Name="Jessica Jones",
         Email="jessyJ@gmail.com",
         Research_Interest="Bioinformatics",
@@ -174,7 +185,7 @@ def addApplicantInfo(request):
         Application_ID="2579291344",
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
-        Nationality="US",
+        Nationality="Mexico",
         Name="Fancy Dan",
         Email="fancy@gmail.com",
         Research_Interest="Artificial Intelligence;Natural Language Processing",
@@ -211,7 +222,7 @@ def addApplicantInfo(request):
         Application_ID="3310526906",
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
-        Nationality="US",
+        Nationality="India",
         Name="Betty Ross",
         Email="betty@gmail.com",
         Research_Interest="Cyber-Physical Systems",
@@ -229,7 +240,7 @@ def addApplicantInfo(request):
         Application_ID="1045163838",
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
-        Nationality="US",
+        Nationality="China",
         Name="Black Panther",
         Email="cap@gmail.com",
         Research_Interest="Data Science",
@@ -247,7 +258,7 @@ def addApplicantInfo(request):
         Application_ID="3530396559",
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
-        Nationality="US",
+        Nationality="Korea",
         Name="Luke Cage",
         Email="luke@gmail.com",
         Research_Interest="Cybersecurity",

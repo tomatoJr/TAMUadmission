@@ -13,7 +13,7 @@
     <a href="#" class="badge badge-success">nationality: All</a>
     <a href="#" class="badge badge-success">research interest: AI</a>
     <a href="#" class="badge badge-success">status: not reviewed</a>
-    <a href="#" class="badge badge-warning">candidate index: 12/23</a>
+    <a href="#" class="badge badge-warning">candidate index: {{pointer}}/{{total_num}}</a>
 </div>
 
 <br>
@@ -43,10 +43,10 @@
       <td>Not reviewed by Tanzir</td>
       <td>{{applicant.Application_ID}}</td>
       <td>{{applicant.Name}}</td>
-      <td>Male</td>
+      <td>{{applicant.Gender}}</td>
       <td>{{applicant.Average_Review_Score}}</td>
       <td>{{applicant.Applied_Degree}}</td>
-      <td>US</td>
+      <td>{{applicant.Nationality}}</td>
       <td>{{applicant.Email}}</td>
       <td>Tanzir</td>
     </tr>
@@ -133,6 +133,7 @@
   <div>
     <button type="button" class="btn btn-success">Confirm</button>
     <a class="btn btn-secondary" href="/review" role="button">Previous candidate</a>
+    {% comment %} <a class="btn btn-secondary" href="{{x.App_Seq_No}}/{{pointer|add:1}}/review" role="button">Next candidate</a> {% endcomment %}
     <a class="btn btn-secondary" href="/review" role="button">Next candidate</a>
     <a class="btn btn-secondary" href="../" role="button">Home</a>
   </div>

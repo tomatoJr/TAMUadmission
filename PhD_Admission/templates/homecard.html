@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
     <div class = "container">
 
 
@@ -17,37 +18,38 @@
         
         
         
-    <form> 
+    <form  action="{% url 'search' %}"> 
       <div class="form-row">
         <div class="col">
-          <label for="inputState" class="col-sm-3 col-form-label">Name</label>
-          <select id="inputState" class="form-control">
-            <option selected>Select reviewer's name</option>
+          <label for="inputState" class="col-sm-3 col-form-label">Reviewer</label>
+          <select id="inputState" class="form-control" name="Reviewer">
+            <option selected></option>
             <option>Tanzir</option>
             <option>Hank</option>
           </select>
         </div>
         <div class="col">
           <label for="inputState" class="col-sm-3 col-form-label">Nationality</label>
-          <select id="inputState" class="form-control">
-            <option selected>Filter by nationality</option>
-            <option>Domestic</option>
+          <select id="inputState" class="form-control" name="Nationality">
+            <option selected></option>
+            <option>US</option>
             <option>China</option>
             <option>India</option>
+            <option>Korea</option>
           </select>
         </div>
         <div class="col">
           <label for="inputState" class="col-sm-3 col-form-label">Interest</label>
-          <select id="inputState" class="form-control">
-            <option selected>Filter by Research Interest</option>
+          <select id="inputState" class="form-control" name="Interest">
+            <option selected></option>
             <option>NLP</option>
             <option>AI</option>
           </select>
         </div>
         <div class="col">
           <label for="inputState" class="col-sm-3 col-form-label">Status</label>
-          <select id="inputState" class="form-control">
-            <option selected>Filter by reviewing status</option>
+          <select id="inputState" class="form-control" name="Status">
+            <option selected></option>
             <option>All candidates</option>
             <option>not reviewed</option>
             <option>reviewed</option>
@@ -75,12 +77,18 @@
 
                 <div class="card-body">
                 <h5 class="card-title">{{x.Name}}</h5>
+                {% comment %} <h5 class="card-title">{{forloop.counter|add:100}}</h5> {% endcomment %}
                 <p class="card-text"> GPA: {{x.MS_University_and_GPA}}</p>
                 <p class="card-text"> GRE: {{x.GRE_Score}}</p>
 
-                
 
-                <a class="btn btn-dark" href="{{x.App_Seq_No}}/review" role="button">REVIEW</a>
+                {% comment %} <p class="card-text"> test: {{applicants.forloop.counter.Name}}</p> {% endcomment %}
+
+
+                {% comment %} <a class="btn btn-dark" href="{{applicants.forloop.counter.Name}}/{{forloop.counter}}/review" role="button">test</a> {% endcomment %}
+
+                {% comment %} <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/review" role="button">REVIEW</a> {% endcomment %}
+                <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a>
  
             </div>
           </div>

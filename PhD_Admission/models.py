@@ -1,5 +1,5 @@
 from django.db import models
-
+# import django_filters
 # Create your models here.
 
 # class Test(models.Model):
@@ -30,3 +30,11 @@ class Applicant(models.Model):
 
     def __str__(self):
         return self.Name
+
+
+# class ApplicantFilter(django_filters.FilterSet):
+#     name = django_filters.CharFilter(lookup_expr='iexact')
+
+#     class Meta:
+#         model = Applicant
+#         fields = ['Name', 'Nationality']

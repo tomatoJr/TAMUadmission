@@ -8,8 +8,23 @@ urlpatterns = [
     path('email/', views.send_email, name='send_email'),
     path('review/', views.review, name='review'),
 
+
+
+
+
     path('addApplicantInfo/', views.addApplicantInfo),
-    path('<int:app_seq_no>/review/', views.review, name='review'),
+    # path('<int:app_seq_no>/review/', views.review, name='review'),
     path('table/<int:app_seq_no>/review/', views.review, name='review'),
+
+    path('<int:app_seq_no>/<int:pointer>/<int:total_num>/review/',
+         views.review, name='review'),
+    path('search/<int:app_seq_no>/<int:pointer>/<int:total_num>/review/',
+         views.review, name='review'),
+
+
+    path('test/', views.test, name='test'),
+    # path('', views.search, name='search'),
+    path('search/', views.search, name='search'),
+
     # path('', include('misterwu')),
 ]

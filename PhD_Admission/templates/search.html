@@ -1,0 +1,10 @@
+{% block content %}
+
+{{search_word}}
+{% for applicant in applicants %}
+<p>{{applicant.Name}}</p>
+{%empty%}
+<p>nothing</p>
+{% endfor %}
+
+{% endblock content %}
