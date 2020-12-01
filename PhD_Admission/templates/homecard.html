@@ -77,17 +77,9 @@
 
                 <div class="card-body">
                 <h5 class="card-title">{{x.Name}}</h5>
-                {% comment %} <h5 class="card-title">{{forloop.counter|add:100}}</h5> {% endcomment %}
-                <p class="card-text"> GPA: {{x.MS_University_and_GPA}}</p>
-                <p class="card-text"> GRE: {{x.GRE_Score}}</p>
+                <p class="card-text"> MS: {{x.MS_University_and_GPA}}</p>
+                <p class="card-text"> BS: {{x.BS_University_and_GPA}}</p>
 
-
-                {% comment %} <p class="card-text"> test: {{applicants.forloop.counter.Name}}</p> {% endcomment %}
-
-
-                {% comment %} <a class="btn btn-dark" href="{{applicants.forloop.counter.Name}}/{{forloop.counter}}/review" role="button">test</a> {% endcomment %}
-
-                {% comment %} <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/review" role="button">REVIEW</a> {% endcomment %}
                 <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a>
  
             </div>

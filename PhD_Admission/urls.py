@@ -11,7 +11,6 @@ urlpatterns = [
 
 
 
-
     path('addApplicantInfo/', views.addApplicantInfo),
     # path('<int:app_seq_no>/review/', views.review, name='review'),
     path('table/<int:app_seq_no>/review/', views.review, name='review'),
@@ -26,5 +25,5 @@ urlpatterns = [
     # path('', views.search, name='search'),
     path('search/', views.search, name='search'),
 
-    # path('', include('misterwu')),
+    path('addReview/', views.addReview, name='addReview'),
 ]

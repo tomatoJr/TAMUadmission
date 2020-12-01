@@ -29,12 +29,22 @@ class Applicant(models.Model):
     Faculty_giving_GAR = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.Name
+        return self.Name+" "+str(self.App_Seq_No)
+
+    class Meta:
+        ordering = ['App_Seq_No']
 
 
-# class ApplicantFilter(django_filters.FilterSet):
-#     name = django_filters.CharFilter(lookup_expr='iexact')
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    faculty = models.CharField(max_length=50)
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
 
-#     class Meta:
-#         model = Applicant
-#         fields = ['Name', 'Nationality']
+    score = models.IntegerField()
+    faculty_decision = models.CharField(max_length=50)
+    assistantship_decision = models.CharField(max_length=50)
+    nomination = models.CharField(max_length=50)
+    comments = models.CharField(max_length=50000)
+
+    def __str__(self):
+        return self.faculty+" "+self.comments

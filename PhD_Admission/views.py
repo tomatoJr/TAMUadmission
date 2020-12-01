@@ -2,9 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect
-
+from django.urls import reverse
 # from .models import Test
-from .models import Applicant
+from .models import Applicant, Review
 
 
 # Create your views here.
@@ -21,12 +21,32 @@ def hometable(request):
 
 
 def review(request, app_seq_no=None, pointer=0, total_num=0):
-    applicants = Applicant.objects.all()
+    context = {}
+    context['applicants'] = Applicant.objects.all()
     applicant = get_object_or_404(Applicant, pk=app_seq_no)
+    context['applicant'] = applicant
 
-    context = {"applicant": applicant,
-               "applicants": applicants,
-               "pointer": pointer, "total_num": total_num}
+    next_applicant = Applicant.objects.filter(
+        Nationality=applicant.Nationality,
+        App_Seq_No__gt=applicant.App_Seq_No).first()
+    context['next_applicant'] = next_applicant
+
+    previous_applicant = Applicant.objects.filter(
+        Nationality=applicant.Nationality,
+        App_Seq_No__lt=applicant.App_Seq_No).last()
+    context['previous_applicant'] = previous_applicant
+
+    print(previous_applicant, applicant, next_applicant)
+    context['pointer'] = pointer
+    context['total_num'] = total_num
+
+    # test
+    reviews = Review.objects.filter(
+        applicant=applicant.pk
+    )
+    for r in reviews:
+        print(r)
+
     return render(request, 'review.html', context)
 
 
@@ -57,8 +77,7 @@ def send_email(request):
 def use(request):
     # sendEmail(1,1,1,1)
     if request.method == 'POST':
-        import requests
-        import json
+
         user = request.POST['user']
         user_request = requests.get("https://api.github.com/users/" + user)
         username = json.loads(user_request.content)
@@ -69,8 +88,33 @@ def use(request):
         return render(request, 'user.html', {'notFound': notFound})
 
 
+def addReview(request):
+    reviewer = request.GET.get("reviewer", '')
+    score = request.GET.get("score", '')
+    faculty_decision = request.GET.get("faculty_decision", '')
+    assistantship_decision = request.GET.get("assistantship_decision", '')
+    nomination = request.GET.get("nomination", '')
+    comments = request.GET.get("comments", '')
+
+    applicant_pk = int(request.GET.get("applicant_pk", ''))
+    applicant = get_object_or_404(Applicant, pk=applicant_pk)
+
+    review = Review()
+    review.faculty = reviewer
+    review.applicant = applicant
+    review.score = score
+    review.faculty_decision = faculty_decision
+    review.assistantship_decision = assistantship_decision
+    review.nomination = nomination
+    review.comments = comments
+    review.save()
+
+    referer = request.META.get("HTTP_REFERER", reverse('homecard'))
+    return redirect(referer)
+
+
 def search(request):
-    print(request)
+    print('search', request)
 
     search_applicants = Applicant.objects.filter(
         Nationality__icontains=request.GET.get('Nationality'))
@@ -98,7 +142,7 @@ def addApplicantInfo(request):
         Name="Kanye West",
         Email="kanye@gmail.com",
         Research_Interest="Data Sicence;Artificial Intelligence",
-        BS_University_and_GPA="Oxford University 4,0",
+        BS_University_and_GPA="Oxford University 4.0",
         MS_University_and_GPA="Stanford University 3.0",
         GRE_Score=152,
         TOEFL_Score=91,
@@ -113,8 +157,8 @@ def addApplicantInfo(request):
         Average_Review_Score=0,
         Applied_Degree="Ph.D. Computer Science",
         Nationality="US",
-        Name="Donald J. Trump",
-        Email="trump@gmail.com",
+        Name="Ant Man",
+        Email="antman@gmail.com",
         Research_Interest="Artificial Intelligence;Natural Language Processing",
         BS_University_and_GPA="University of Cambridge 4.0",
         MS_University_and_GPA="University of Cambridge 3.8",
@@ -171,7 +215,7 @@ def addApplicantInfo(request):
         Name="Garrison Kane",
         Email="kane@gmail.com",
         Research_Interest="Data Sicence; Artificial Intelligence",
-        BS_University_and_GPA="Oxford University 4,0",
+        BS_University_and_GPA="Oxford University 4.0",
         MS_University_and_GPA="Stanford University 3.0",
         GRE_Score=152,
         TOEFL_Score=91,

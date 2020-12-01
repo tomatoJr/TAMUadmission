@@ -26,40 +26,43 @@
 <table class="table table-bordered">
 <thead>
     <tr>
-      <th>Reviewing status</th>
       <th>ID</th>
       <th>Name</th>
-      <th>Gender, Ethnicity, Residency, Citizenship</th>
-      <th>Average Score</th>
+      <th>Gender</th>
+      <th>Ethnicity</th>
+      <th>Residency</th>
+      <th>Citizenship</th>
+
       <th>Applied Degree</th>
       <th>Nationality</th>
       <th>Email</th>
-      <th>Potential Faculty</th>
       
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Not reviewed by Tanzir</td>
       <td>{{applicant.Application_ID}}</td>
       <td>{{applicant.Name}}</td>
       <td>{{applicant.Gender}}</td>
-      <td>{{applicant.Average_Review_Score}}</td>
+      <td>{{applicant.Ethnicity}}</td>
+      <td>{{applicant.Residency}}</td>
+      <td>{{applicant.Citizenship}}</td>
+ 
       <td>{{applicant.Applied_Degree}}</td>
       <td>{{applicant.Nationality}}</td>
       <td>{{applicant.Email}}</td>
-      <td>Tanzir</td>
     </tr>
 
   </tbody>
   <thead>
     <tr>
-      <th>BS University</th>
+      {% comment %} <th>Reviewing status</th> {% endcomment %}
+      <th>Average Score</th>
       <th>BS GPA</th>
-      <th>MS University</th>
       <th>MS GPA</th>
       <th>GRE Score</th>
       <th>Toefl score</th>
+      <th>Potential Faculty</th>
       <th>Faculty contact</th>
       <th>Faculty giving GANT/GAT</th>
       <th>Faculty giving GAR</th>
@@ -67,12 +70,13 @@
   </thead>
   <tbody>
     <tr>
-      <td>TAMU </td>
-      <td>3.9</td>
-      <td>TAMU </td>
-      <td>3.9</td>
+      {% comment %} <td>Not reviewed by Tanzir</td> {% endcomment %}
+      <td>{{applicant.Average_Review_Score}}</td>
+      <td>{{applicant.BS_University_and_GPA}}</td>
+      <td>{{applicant.MS_University_and_GPA}}</td>
       <td>320</td>
       <td>N/A</td>
+      <td>Tanzir</td>
       <td>Tanzir</td>
       <td>N/A</td>
       <td>N/A</td>
@@ -81,10 +85,32 @@
 </table>
 
 
-<form>
+
+
+
+
+
+
+
+
+
+
+
+<form  action="{% url 'addReview' %}">
+<div>
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Reviewer</label>
+    <select class="form-control" name="reviewer" id="exampleFormControlSelect1">
+      <option>Tanzir</option>
+      <option>Hank</option>
+    </select>
+  </div>
+
+
   <div class="form-group">
     <label for="exampleFormControlSelect1">Input Score</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" name="score" id="exampleFormControlSelect1">
       <option>5</option>
       <option>4</option>
       <option>3</option>
@@ -96,7 +122,7 @@
   
   <div class="form-group">
     <label for="exampleFormControlSelect1">Do you want be this candidate's faculty</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" name="faculty_decision" id="exampleFormControlSelect1">
       <option>No</option>
       <option>Yes</option>
     </select>
@@ -104,7 +130,7 @@
   
   <div class="form-group">
     <label for="exampleFormControlSelect1">Do you want provide assistantship to this candidate</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" name="assistantship_decision" id="exampleFormControlSelect1">
       <option>No</option>
       <option>Yes</option>
     </select>
@@ -112,7 +138,7 @@
   
   <div class="form-group">
     <label for="exampleFormControlSelect1">Do you want nominate another faculty as contact? (we will send an email to this faculty)</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" name="nomination" id="exampleFormControlSelect1">
       <option>No</option>
       <option>Tom</option>
       <option>Jim</option>
@@ -124,19 +150,29 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Input Comments</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" name="comments" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
   
+
+  <input type="hidden" name="applicant_pk" value="{{applicant.pk}}">
   
   
   
   <div>
-    <button type="button" class="btn btn-success">Confirm</button>
-    <a class="btn btn-secondary" href="/review" role="button">Previous candidate</a>
-    {% comment %} <a class="btn btn-secondary" href="{{x.App_Seq_No}}/{{pointer|add:1}}/review" role="button">Next candidate</a> {% endcomment %}
-    <a class="btn btn-secondary" href="/review" role="button">Next candidate</a>
-    <a class="btn btn-secondary" href="../" role="button">Home</a>
+    <button type="submit" class="btn btn-success">Confirm</button>
+
+    {% if previous_applicant %}
+            <a class="btn btn-secondary" href={% url 'review' previous_applicant.App_Seq_No pointer|add:-1 total_num %} role="button">Previous candidate</a>
+    {% endif %}
+
+    {% if next_applicant %}
+        <a class="btn btn-secondary" href={% url 'review' next_applicant.App_Seq_No pointer|add:1 total_num %} role="button">Next candidate</a>
+    {% endif %}
+    
+    <a class="btn btn-secondary" href={% url 'homecard' %} role="button">Back</a>
+
   </div>
+</div>
 </form>
 
 
