@@ -46,7 +46,7 @@ def review(request, app_seq_no=None, pointer=0, total_num=0):
     )
     for r in reviews:
         print(r)
-
+    context['reviews'] = reviews
     return render(request, 'review.html', context)
 
 
