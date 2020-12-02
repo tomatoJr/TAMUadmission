@@ -9,16 +9,14 @@
     <br>
 <div>
     
-    <a href="#" class="badge badge-primary">Reviewing by Tanzir</a>
+    {% comment %} <a href="#" class="badge badge-primary">Reviewing by Tanzir</a>
     <a href="#" class="badge badge-success">nationality: All</a>
     <a href="#" class="badge badge-success">research interest: AI</a>
-    <a href="#" class="badge badge-success">status: not reviewed</a>
+    <a href="#" class="badge badge-success">status: not reviewed</a> {% endcomment %}
     <a href="#" class="badge badge-warning">candidate index: {{pointer}}/{{total_num}}</a>
 </div>
 
 <br>
-
-
 
 
 
@@ -90,7 +88,28 @@
 
 
 
-
+<table class="table table-condensed">
+  <thead>
+      <tr>
+        <th>faculty</th>
+        <th>score</th>
+        <th>willingness</th>
+        <th>assistantship</th>
+        <th>comments</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for review in reviews%}
+      <tr>
+      <td>{{review.faculty}}</td>
+      <td>{{review.score}}</td>
+      <td>{{review.faculty_decision}}</td>
+      <td>{{review.assistantship_decision}}</td>
+      <td>{{review.comments}}</td>
+      </tr>
+    {% endfor%}
+    </tbody>
+  </table>
 
 
 

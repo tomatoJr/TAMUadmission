@@ -10,6 +10,7 @@ from .models import Applicant, Review
 # Create your views here.
 def homecard(request):
     applicants = Applicant.objects.all()
+    print(applicants)
     context = {"applicants": applicants, "total_num": len(applicants)}
     return render(request, 'homecard.html', context)
 
@@ -21,32 +22,34 @@ def hometable(request):
 
 
 def review(request, app_seq_no=None, pointer=0, total_num=0):
+    print('request', request)
+
     context = {}
     context['applicants'] = Applicant.objects.all()
     applicant = get_object_or_404(Applicant, pk=app_seq_no)
     context['applicant'] = applicant
 
     next_applicant = Applicant.objects.filter(
-        Nationality=applicant.Nationality,
+        # Nationality=applicant.Nationality,
         App_Seq_No__gt=applicant.App_Seq_No).first()
     context['next_applicant'] = next_applicant
 
     previous_applicant = Applicant.objects.filter(
-        Nationality=applicant.Nationality,
+        # Nationality=applicant.Nationality,
         App_Seq_No__lt=applicant.App_Seq_No).last()
     context['previous_applicant'] = previous_applicant
 
-    print(previous_applicant, applicant, next_applicant)
+    # print(previous_applicant, applicant, next_applicant)
     context['pointer'] = pointer
     context['total_num'] = total_num
 
-    # test
     reviews = Review.objects.filter(
         applicant=applicant.pk
     )
-    for r in reviews:
-        print(r)
+    # for r in reviews:
+    #     print(r)
     context['reviews'] = reviews
+
     return render(request, 'review.html', context)
 
 
@@ -89,6 +92,7 @@ def use(request):
 
 
 def addReview(request):
+    print(request)
     reviewer = request.GET.get("reviewer", '')
     score = request.GET.get("score", '')
     faculty_decision = request.GET.get("faculty_decision", '')
@@ -98,6 +102,12 @@ def addReview(request):
 
     applicant_pk = int(request.GET.get("applicant_pk", ''))
     applicant = get_object_or_404(Applicant, pk=applicant_pk)
+    if applicant.Average_Review_Score != 0:
+        applicant.Average_Review_Score += float(score)
+        applicant.Average_Review_Score = applicant.Average_Review_Score/2
+    else:
+        applicant.Average_Review_Score += float(score)
+    applicant.save()
 
     review = Review()
     review.faculty = reviewer
@@ -116,20 +126,22 @@ def addReview(request):
 def search(request):
     print('search', request)
 
+    nationality = request.GET.get('Nationality', '')
+
     search_applicants = Applicant.objects.filter(
-        Nationality__icontains=request.GET.get('Nationality'))
+        Nationality__icontains=nationality)
 
     print(search_applicants)
 
     context = {}
     context['applicants'] = search_applicants
     context['total_num'] = len(search_applicants)
-    # return render(request, 'search.html', context)
+    context['query'] = {
+        'nationality ': nationality,
+    }
+    print(context)
+
     return render(request, 'homecard.html', context)
-
-
-def test(request):
-    return render(request, 'test.html', {})
 
 
 def addApplicantInfo(request):

@@ -20,14 +20,7 @@
         
     <form  action="{% url 'search' %}"> 
       <div class="form-row">
-        <div class="col">
-          <label for="inputState" class="col-sm-3 col-form-label">Reviewer</label>
-          <select id="inputState" class="form-control" name="Reviewer">
-            <option selected></option>
-            <option>Tanzir</option>
-            <option>Hank</option>
-          </select>
-        </div>
+
         <div class="col">
           <label for="inputState" class="col-sm-3 col-form-label">Nationality</label>
           <select id="inputState" class="form-control" name="Nationality">
@@ -55,7 +48,7 @@
             <option>reviewed</option>
           </select>
         </div>
-             <button type="submit" class="btn btn-secondary">Confirm</button>
+             <button type="submit" class="btn btn-secondary">Search</button>
       </div>
   </form>
   
@@ -63,10 +56,6 @@
 <br>
     <a class="btn btn-secondary" href="/table" role="button">CARD<->SHEET</a>
     <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
-
-
-
-
 
         <div class="row">
             {%for x in applicants%}
@@ -80,22 +69,19 @@
                 <p class="card-text"> MS: {{x.MS_University_and_GPA}}</p>
                 <p class="card-text"> BS: {{x.BS_University_and_GPA}}</p>
 
-                <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a>
- 
+
+                {% comment %} <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a> {% endcomment %}
+                <a class="btn btn-dark" href="{% url 'review' x.App_Seq_No forloop.counter applicants|length%}" role="button">REVIEW</a>
+
+             
             </div>
           </div>
 
-          
-          
-          
             </div>
             {%endfor%}
     </div>
 
     </div>
-
-
-
 
     <!-- <p>{{api}}</p> -->
 {%endblock%}

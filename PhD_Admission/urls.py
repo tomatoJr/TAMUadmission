@@ -21,8 +21,6 @@ urlpatterns = [
          views.review, name='review'),
 
 
-    path('test/', views.test, name='test'),
-    # path('', views.search, name='search'),
     path('search/', views.search, name='search'),
 
     path('addReview/', views.addReview, name='addReview'),
