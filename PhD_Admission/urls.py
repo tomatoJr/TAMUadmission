@@ -13,7 +13,10 @@ urlpatterns = [
 
     path('addApplicantInfo/', views.addApplicantInfo),
     # path('<int:app_seq_no>/review/', views.review, name='review'),
-    path('table/<int:app_seq_no>/review/', views.review, name='review'),
+    #     path('table/<int:app_seq_no>/review/', views.review, name='review'),
+    path('table/<int:app_seq_no>/<int:pointer>/<int:total_num>/review/',
+         views.review, name='review'),
+
 
     path('<int:app_seq_no>/<int:pointer>/<int:total_num>/review/',
          views.review, name='review'),

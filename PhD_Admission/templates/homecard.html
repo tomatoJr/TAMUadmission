@@ -4,8 +4,6 @@
 
 
     <div class = "container">
-
-
     <script>
     function myFunction()
     {
@@ -13,14 +11,19 @@
         var text = "Email has been sent";
     }
     </script>
-
         <!--<a class="btn btn-secondary" href="/email" role="button" onclick="myFunction()" value="Alert">EMAIL</a>-->
-        
-        
-        
+    
+
     <form  action="{% url 'search' %}"> 
       <div class="form-row">
-
+        <div class="col">
+          <label for="inputState" class="col-sm-3 col-form-label">Reviewer</label>
+          <select id="inputState" class="form-control" name="Reviewer">
+            <option selected></option>
+            <option>Tanzir</option>
+            <option>Hank</option>
+          </select>
+        </div>
         <div class="col">
           <label for="inputState" class="col-sm-3 col-form-label">Nationality</label>
           <select id="inputState" class="form-control" name="Nationality">
@@ -48,15 +51,17 @@
             <option>reviewed</option>
           </select>
         </div>
-             <button type="submit" class="btn btn-secondary">Search</button>
+              <input type="hidden" name="view" value="{{view}}">
+             <button type="submit" class="btn btn-secondary">Confirm</button>
       </div>
   </form>
   
   
 <br>
+    
+    {%if view == "card_view"%}
     <a class="btn btn-secondary" href="/table" role="button">CARD<->SHEET</a>
     <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
-
         <div class="row">
             {%for x in applicants%}
 
@@ -69,19 +74,55 @@
                 <p class="card-text"> MS: {{x.MS_University_and_GPA}}</p>
                 <p class="card-text"> BS: {{x.BS_University_and_GPA}}</p>
 
-
-                {% comment %} <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a> {% endcomment %}
-                <a class="btn btn-dark" href="{% url 'review' x.App_Seq_No forloop.counter applicants|length%}" role="button">REVIEW</a>
-
-             
+                <a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a>
             </div>
           </div>
-
             </div>
             {%endfor%}
-    </div>
+        </div>
+    {%else%}
+    <a class="btn btn-secondary" href='../' role="button">CARD<->SHEET</a>
+    <a class="btn btn-secondary" href='/email' role="button" onclick="myFunction()">EMAIL</a>
+        <div class="row">
+          <table class="table table-bordered">
+            <caption>TABLE</caption>
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>MS</th>
+                <th>BS</th>
+                
+              </tr>
+            </thead>
+
+
+            <tbody>
+              {%for x in applicants%}
+                <tr>
+                  <td><a class="btn btn-dark" href="{{x.App_Seq_No}}/{{forloop.counter}}/{{applicants|length}}/review" role="button">REVIEW</a></td>
+                  <td>{{x.Name}}</td>
+                  <td>{{x.MS_University_and_GPA}}</td>
+                  <td>{{x.BS_University_and_GPA}}</td>
+                  
+                </tr>
+              {%endfor%}
+              </tbody>
+            </table>
+      
+
+
+
+        </div>
+
+    {%endif%}
+
+
 
     </div>
+
+
+
 
     <!-- <p>{{api}}</p> -->
 {%endblock%}

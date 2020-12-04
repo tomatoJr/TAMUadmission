@@ -12,13 +12,15 @@ def homecard(request):
     applicants = Applicant.objects.all()
     print(applicants)
     context = {"applicants": applicants, "total_num": len(applicants)}
+    context['view'] = "card_view"
     return render(request, 'homecard.html', context)
 
 
 def hometable(request):
     applicants = Applicant.objects.all()
     context = {"applicants": applicants, "total_num": len(applicants)}
-    return render(request, 'hometable.html', context)
+    context['view'] = "table_view"
+    return render(request, 'homecard.html', context)
 
 
 def review(request, app_seq_no=None, pointer=0, total_num=0):
@@ -140,6 +142,7 @@ def search(request):
         'nationality ': nationality,
     }
     print(context)
+    context['view'] = request.GET.get('view', 'card_view')
 
     return render(request, 'homecard.html', context)
 
